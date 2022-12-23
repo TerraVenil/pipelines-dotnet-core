@@ -33,6 +33,7 @@ steps:
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Visual Studio Enterprise Subscription – MPN(7b8f8641-e0fd-4cde-8d1f-b80dbb034d0d)'
-    appType: 'webAppLinux'
+    appType: 'webApp'
     appName: 'MyFirstPipeline'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
