@@ -13,7 +13,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-
 - task: UseDotNet@2
   inputs:
     version: '6.x'
@@ -29,11 +28,11 @@ steps:
   inputs:
     command: publish
     publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    arguments: '--configuration $(BuildConfiguration)'
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishPipelineArtifact@1
+- task: AzureWebApp@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myWebsiteName'
+    azureSubscription: 'Visual Studio Enterprise Subscription – MPN(7b8f8641-e0fd-4cde-8d1f-b80dbb034d0d)'
+    appType: 'webAppLinux'
+    appName: 'MyFirstPipeline'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
